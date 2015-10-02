@@ -1,0 +1,15 @@
+---
+
+# TODO: the conf files; nginx gunicorn is not right
+# we have to change it.
+
+- hosts: all
+
+  sudo: yes
+
+  vars:
+      host: "{{ inventory_hostname }}"
+
+  tasks:
+    - name: make sure required packages are installed
+      apt: pkg=python3 state=present

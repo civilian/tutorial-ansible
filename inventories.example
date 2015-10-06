@@ -8,3 +8,35 @@ bar.example.com
 one.example.com
 two.example.com
 three.example.com
+
+[specificports]
+badwolf.example.com:5309
+
+# A static ip with an alias
+jumper ansible_port=5555 ansible_host=192.168.1.50
+
+# webservers in a secuence add a lot
+www[01:50].example.com
+[databases]
+db-[a:f].example.com
+
+# we can also select the connection type and user on per host basis.
+[targets]
+
+localhost              ansible_connection=local
+other1.example.com     ansible_connection=ssh        ansible_user=mpdehaan
+other2.example.com     ansible_connection=ssh        ansible_user=mdehaan
+
+# Variables by host
+[atlanta]
+host1 http_port=80 maxRequestsPerChild=808
+host2 http_port=303 maxRequestsPerChild=909
+
+# Apply variables to a whole gruop
+[atlanta]
+host1
+host2
+
+[atlanta:vars]
+ntp_server=ntp.atlanta.example.com
+proxy=proxy.atlanta.example.com

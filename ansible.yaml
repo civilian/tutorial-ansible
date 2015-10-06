@@ -1,8 +1,5 @@
 ---
 
-# TODO: the conf files; nginx gunicorn is not right
-# we have to change it.
-
 - hosts: all
 
   sudo: yes
@@ -13,3 +10,18 @@
   tasks:
     - name: make sure required packages are installed
       apt: pkg=python3 state=present
+
+    - include: tasks/foo.yml
+
+    # Passing variables to includes.
+    - include: wordpress.yml wp_user=timmy
+    - include: wordpress.yml wp_user=alice
+    - include: wordpress.yml wp_user=bob
+
+    # Structured variables.
+    - include: wordpress.yml
+    vars:
+        wp_user: timmy
+        ssh_keys:
+          - keys/one.txt
+          - keys/two.txt
